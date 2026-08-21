@@ -6,7 +6,7 @@
 //
 // 각 유틸의 실제 빌드 결과(dist/<slug>/)는 워크플로가 채웁니다.
 
-import { mkdir, writeFile, readFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -121,8 +121,27 @@ footer a { color: var(--accent); }
 .repos { margin: 0.5rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
 `.trim();
 
+// 유틸은 새 탭에서 연다. 이 목록으로 돌아오기 쉬운 것도 있지만, 유틸마다 자기
+// 파비콘이 있어서 같은 탭에서 열면 돌아온 뒤에도 그 아이콘이 탭에 남는다.
+// rel="noopener" 는 새 탭이 window.opener 로 이 페이지를 만지지 못하게 막는다.
+/**
+ * 파비콘.
+ *
+ * 이 사이트만 자기 아이콘을 가진다. 각 유틸은 자기 파비콘을 그대로 쓰므로,
+ * 유틸에서 랜딩으로 돌아오면 아이콘이 이 M 마크로 바뀐다.
+ *
+ * - SVG: 최신 브라우저용. 배율에 상관없이 또렷하다.
+ * - 32px PNG: SVG 파비콘을 모르는 구형 브라우저용 폴백.
+ * - apple-touch-icon: iOS 홈 화면용. 모서리는 iOS 가 깎으므로 정사각 꽉 찬 바탕이다.
+ *
+ * 파일은 assets/ 에 있고, PNG 는 favicon.svg 에서 뽑은 것이다(만드는 방법은 CLAUDE.md).
+ */
+const icons = `<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">`;
+
 const card = (u) => `
-      <a class="card" href="/${esc(u.slug)}/">
+      <a class="card" href="/${esc(u.slug)}/" target="_blank" rel="noopener">
         <span class="card-head">
           <span class="emoji" aria-hidden="true">${esc(u.emoji)}</span>
           <h2 class="name">${esc(u.name)}</h2>
@@ -131,7 +150,7 @@ const card = (u) => `
         <span class="tags">${u.highlights
           .map((h) => `<span class="tag">${esc(h)}</span>`)
           .join("")}</span>
-        <span class="go">바로 쓰기 →</span>
+        <span class="go">새 탭에서 열기 ↗</span>
       </a>`;
 
 const indexHtml = `<!doctype html>
@@ -146,6 +165,7 @@ const indexHtml = `<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://${esc(site.domain)}/">
 <link rel="canonical" href="https://${esc(site.domain)}/">
+${icons}
 <style>
 ${styles}
 </style>
@@ -163,7 +183,7 @@ ${styles}
       <ul class="repos">${utils
         .map(
           (u) =>
-            `<li><a href="https://github.com/${esc(site.owner)}/${esc(u.repo)}">${esc(u.name)} 소스</a></li>`
+            `<li><a href="https://github.com/${esc(site.owner)}/${esc(u.repo)}" target="_blank" rel="noopener">${esc(u.name)} 소스</a></li>`
         )
         .join("")}
       </ul>
@@ -179,6 +199,7 @@ const notFoundHtml = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>없는 주소입니다 · ${esc(site.title)}</title>
+${icons}
 <style>
 ${styles}
 </style>
@@ -229,6 +250,12 @@ await write("CNAME", `${site.domain}\n`);
 // Next 의 _next/ 디렉터리가 사라지는 일을 확실히 막아 둡니다.
 await write(".nojekyll", "");
 
+// 파비콘 자산을 그대로 옮긴다. assets/ 에 파일을 추가하면 자동으로 따라온다.
+const assetsDir = join(root, "assets");
+for (const name of await readdir(assetsDir)) {
+  await copyFile(join(assetsDir, name), join(dist, name));
+}
+
 for (const u of utils) {
   if (u.repo === u.slug) continue;
   await write(join(u.repo, "index.html"), redirectHtml(u.slug));
@@ -237,5 +264,5 @@ for (const u of utils) {
 console.log(
   `랜딩 페이지 생성 완료: ${utils.length}개 유틸, 리다이렉트 ${
     utils.filter((u) => u.repo !== u.slug).length
-  }개`
+  }개, 자산 ${(await readdir(assetsDir)).length}개`
 );
