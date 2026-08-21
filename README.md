@@ -56,8 +56,13 @@ dist/
 }
 ```
 
-새 유틸 리포는 `NEXT_PUBLIC_BASE_PATH` 를 읽어 `basePath` 를 정하고
-`output: "export"` 로 `out/` 을 내보내야 합니다.
+새 유틸 리포에 필요한 것:
+
+- `NEXT_PUBLIC_BASE_PATH` 를 읽어 `basePath` 를 정하고, `output: "export"` 로 `out/` 을
+  내보냅니다.
+- **localStorage 키에 `ml:<슬러그>:` 접두어를 붙입니다.** 유틸들이 한 오리진을 공유하므로
+  접두어 없는 키는 다른 유틸의 설정을 덮어씁니다. 테마만 예외로 `ml:theme` 을 함께 쓰고,
+  값은 `'light' | 'dark' | 'system'` 입니다. 자세한 규칙은 `CLAUDE.md` 참고.
 
 ## 로컬에서 확인
 
