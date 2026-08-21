@@ -40,12 +40,14 @@ GitHub Pages 는 **하나의 커스텀 도메인을 하나의 사이트에만** 
 깨진다. 부득이하게 바꿀 때는 **옛 슬러그로 들어온 요청을 새 슬러그로 보내는 리다이렉트를
 남긴다**. `build-site.mjs` 의 리다이렉트 생성부가 그 자리다(현재는 리포 이름 → 슬러그).
 
-### 4. 유틸 리포에 요구되는 두 가지
+### 4. 유틸 리포에 요구되는 것
 
-새 유틸을 붙이려면 그 리포가 이걸 만족해야 한다. 아니면 `out/` 이 없어서 빌드가 죽는다.
+새 유틸을 붙이려면 그 리포가 이걸 만족해야 한다. 위 둘이 없으면 `out/` 이 없어서 빌드가
+죽는다. 세 번째는 죽지 않고 **조용히 다른 유틸의 설정을 망가뜨린다**(§5).
 
 - `basePath` 를 `NEXT_PUBLIC_BASE_PATH` 환경변수로 받는다.
 - `output: "export"` 로 `out/` 을 내보낸다.
+- localStorage / IndexedDB 키에 `ml:<슬러그>:` 접두어를 붙인다 (§5).
 
 **함정:** `actions/configure-pages` 의 `static_site_generator: next` 를 쓰면, 그 액션이
 `next.config.js` 를 새로 만들어 `output`/`basePath` 를 주입한다. Next 는 `next.config.js`
