@@ -23,6 +23,9 @@ GitHub Pages 는 **하나의 커스텀 도메인을 하나의 사이트에만** 
 dist/
 ├── index.html                  ← 랜딩 페이지 (scripts/build-site.mjs 가 생성)
 ├── 404.html
+├── favicon.svg                 ← 랜딩 파비콘 (assets/ 에서 복사)
+├── favicon-32.png              ← 구형 브라우저 폴백
+├── apple-touch-icon.png        ← iOS 홈 화면
 ├── CNAME
 ├── damage/                     ← damage-calculator 를 basePath=/damage 로 빌드한 결과
 ├── enhance/
@@ -73,6 +76,10 @@ npx serve dist                # 또는 python3 -m http.server -d dist
 
 유틸 본체까지 포함한 사이트 전체는 배포 워크플로가 조립합니다.
 랜딩 페이지만 볼 때는 유틸 카드 링크가 404 로 뜨는 게 정상입니다.
+
+카드는 **새 탭**에서 열립니다. 각 유틸이 자기 파비콘을 가지고 있어서, 같은 탭에서 열면
+돌아온 뒤에도 그 아이콘이 탭에 남기 때문입니다. 랜딩만 `favicon.svg`(M 마크)를 쓰고,
+유틸 아이콘은 그대로 둡니다.
 
 ## 배포
 
