@@ -13,8 +13,13 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
-  # 유틸 리포가 업데이트되어도 이 리포에는 푸시가 없으므로, 하루 한 번(03:00 KST)
-  # 다시 빌드해서 최신 상태를 따라갑니다. 즉시 반영이 필요하면 수동 실행하세요.
+  # 유틸 리포가 배포를 마치면 이쪽으로 알려 줍니다(각 리포 워크플로의 마지막 단계).
+  # 이 리포에는 푸시가 없으니, 알림이 없으면 유틸 업데이트를 영영 모릅니다.
+  repository_dispatch:
+    types: ["utils-updated"]
+  # 알림이 유실되거나 시크릿이 만료됐을 때를 위한 안전망(03:00 KST).
+  # 주의: 스케줄 워크플로는 리포에 60일간 활동이 없으면 GitHub 가 자동으로 끕니다.
+  # 이 리포는 조용하므로 안전망을 안전망으로만 믿을 것 — 즉시 반영은 위 알림이 담당합니다.
   schedule:
     - cron: "0 18 * * *"
 
@@ -33,6 +38,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Why this run
+        run: |
+          echo "트리거: ${{ github.event_name }}"
+          echo "알린 리포: ${{ github.event.client_payload.repo || '-' }}"
+          echo "알린 커밋: ${{ github.event.client_payload.sha || '-' }}"
 
       - name: Setup Node
         uses: actions/setup-node@v4

@@ -71,13 +71,20 @@ npx serve dist                # 또는 python3 -m http.server -d dist
 
 ## 배포
 
-`main` 에 푸시하면 배포됩니다. 유틸 리포가 업데이트되어도 이 리포에는 푸시가
-없으므로, 매일 03:00(KST)에 한 번 다시 빌드해 최신 상태를 따라갑니다.
+`main` 에 푸시하면 배포됩니다.
+
+유틸 리포가 업데이트되어도 이 리포에는 푸시가 없으므로, 각 유틸의 배포 워크플로가
+마지막에 이 리포로 `repository_dispatch`(`utils-updated`) 를 보내 재빌드를 트리거합니다.
+유틸 리포에는 이 리포에 대한 Contents 쓰기 권한만 가진 fine-grained PAT 를
+`MAPLELAND_UTILS_DISPATCH` 시크릿으로 넣어 둡니다.
+
+매일 03:00(KST) cron 은 알림이 유실되거나 PAT 가 만료됐을 때를 위한 안전망입니다.
 즉시 반영이 필요하면 Actions 에서 **Deploy** 를 수동 실행하세요.
 
 ### 도메인 설정 (한 번만)
 
 1. DNS: `mapleland` CNAME → `myungwoo.github.io`
-2. 이 리포 Settings → Pages → Custom domain 에 `mapleland.myungwoo.kr`
-   (`dist/CNAME` 이 매 배포마다 같은 값을 올리므로 설정이 유지됩니다)
-3. Enforce HTTPS 체크
+   (`*.myungwoo.kr` 와일드카드가 있으므로, `mapleland` 명시 레코드로 덮어써야 합니다)
+2. 이 리포 Settings → Pages → Source: **GitHub Actions**,
+   Custom domain: `mapleland.myungwoo.kr`
+3. 인증서가 발급되면 Enforce HTTPS 체크
