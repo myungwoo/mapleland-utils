@@ -92,11 +92,3 @@ npx serve dist                # 또는 python3 -m http.server -d dist
 
 매일 03:00(KST) cron 은 알림이 유실되거나 PAT 가 만료됐을 때를 위한 안전망입니다.
 즉시 반영이 필요하면 Actions 에서 **Deploy** 를 수동 실행하세요.
-
-### 도메인 설정 (한 번만)
-
-1. DNS: `mapleland` CNAME → `myungwoo.github.io`
-   (`*.myungwoo.kr` 와일드카드가 있으므로, `mapleland` 명시 레코드로 덮어써야 합니다)
-2. 이 리포 Settings → Pages → Source: **GitHub Actions**,
-   Custom domain: `mapleland.myungwoo.kr`
-3. 인증서가 발급되면 Enforce HTTPS 체크
