@@ -1,0 +1,55 @@
+{
+  "site": {
+    "domain": "mapleland.myungwoo.kr",
+    "title": "메이플랜드 유틸 모음",
+    "tagline": "설치 없이 브라우저에서 바로 쓰는 메이플랜드 도구들. 계산은 전부 내 컴퓨터에서 끝납니다.",
+    "owner": "myungwoo"
+  },
+  "utils": [
+    {
+      "slug": "damage",
+      "repo": "damage-calculator",
+      "ref": "main",
+      "emoji": "🗡️",
+      "name": "데미지 계산기",
+      "summary": "나이트로드(표창) 데미지와 N방컷 확률을 계산합니다. 시뮬레이션이 아니라 FFT 컨볼루션으로 확률분포를 직접 구합니다.",
+      "highlights": ["몬스터 프리셋 438종", "베놈 도트 · 넉백 · 회피", "몹 방어업 반영"]
+    },
+    {
+      "slug": "enhance",
+      "repo": "mapleland-enhance-analyzer",
+      "ref": "main",
+      "emoji": "🍁",
+      "name": "주문서 강화 분석기",
+      "summary": "목표 공격력까지 가는 최소 기대비용 전략과 손절 시점을 동적계획으로 계산합니다. 예산 제약 하 달성 확률도 같이 봅니다.",
+      "highlights": ["기대비용 최소 전략", "손절 시점 계산", "예산별 달성 확률"]
+    },
+    {
+      "slug": "exp",
+      "repo": "mapleland-exp-tracker-web",
+      "ref": "main",
+      "emoji": "📈",
+      "name": "경험치 측정기",
+      "summary": "게임 창을 캡처해서 레벨과 경험치를 자동으로 읽습니다. 시간당 경험치와 예상 레벨업 시각을 보여줍니다.",
+      "highlights": ["화면 캡처 자동 인식", "2.0 비트맵 글꼴 대응", "페이스 · 예상 시각"]
+    },
+    {
+      "slug": "hunt",
+      "repo": "mapleland-timer",
+      "ref": "main",
+      "emoji": "⏱️",
+      "name": "사냥 타이머",
+      "summary": "사냥 한 판의 시간을 재고, 경험치와 메소 수익을 정산합니다. 브라우저를 닫았다 열어도 시간이 이어집니다.",
+      "highlights": ["스톱워치 · 타이머", "메소 순수익 계산", "아이템 변동 기록"]
+    },
+    {
+      "slug": "split",
+      "repo": "group-allocator",
+      "ref": "main",
+      "emoji": "💰",
+      "name": "공대 분배 계산기",
+      "summary": "공대 수입과 인센티브, 패널티를 넣으면 인당 분배금을 계산합니다. 결과를 PNG나 PDF로 바로 공유할 수 있습니다.",
+      "highlights": ["패널티 · 인센티브 반영", "PNG · PDF 출력", "제외 인원 처리"]
+    }
+  ]
+}

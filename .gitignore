@@ -1,0 +1,26 @@
+# 빌드 산출물
+/dist/
+
+# 의존성 (지금은 없지만, 나중에 도구를 붙일 때를 위해)
+/node_modules
+
+# 에이전트 로컬 상태 (사용자마다 다름)
+.claude/worktrees/
+.claude/settings.local.json
+.claude/local/
+
+# 에디터 로컬 설정 (사용자마다 다름)
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
