@@ -7,6 +7,7 @@
 | --- | --- | --- |
 | 🗡️ 데미지 계산기 | [/damage](https://mapleland.myungwoo.kr/damage/) | [damage-calculator](https://github.com/myungwoo/damage-calculator) |
 | 🍁 주문서 강화 분석기 | [/enhance](https://mapleland.myungwoo.kr/enhance/) | [mapleland-enhance-analyzer](https://github.com/myungwoo/mapleland-enhance-analyzer) |
+| 🌀 혼돈의 주문서 분석기 | [/chaos](https://mapleland.myungwoo.kr/chaos/) | [mapleland-chaos-analyzer](https://github.com/myungwoo/mapleland-chaos-analyzer) |
 | 📈 경험치 측정기 | [/exp](https://mapleland.myungwoo.kr/exp/) | [mapleland-exp-tracker-web](https://github.com/myungwoo/mapleland-exp-tracker-web) |
 | ⏱️ 사냥 타이머 | [/hunt](https://mapleland.myungwoo.kr/hunt/) | [mapleland-timer](https://github.com/myungwoo/mapleland-timer) |
 | 🩸 하이퍼 바디 계산기 | [/hyperbody](https://mapleland.myungwoo.kr/hyperbody/) | [hyper-body-calculator](https://github.com/myungwoo/hyper-body-calculator) |
