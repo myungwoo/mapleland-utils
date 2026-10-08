@@ -25,6 +25,15 @@
       "highlights": ["기대비용 최소 전략", "손절 시점 계산", "예산별 달성 확률"]
     },
     {
+      "slug": "chaos",
+      "repo": "mapleland-chaos-analyzer",
+      "ref": "main",
+      "emoji": "🌀",
+      "name": "혼돈의 주문서 분석기",
+      "summary": "혼돈의 주문서로 원하는 능력치 조합을 만드는 최소 기대비용 전략과 손절 시점을 계산합니다. 필요한 아이템·주문서 수와 장터 매물의 값어치도 알려 줍니다.",
+      "highlights": ["능력치 여러 개 동시 목표", "손절 지도", "확률 직접 수정"]
+    },
+    {
       "slug": "exp",
       "repo": "mapleland-exp-tracker-web",
       "ref": "main",

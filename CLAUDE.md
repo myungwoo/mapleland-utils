@@ -57,14 +57,14 @@ GitHub Pages 는 **하나의 커스텀 도메인을 하나의 사이트에만** 
 
 ### 5. localStorage 키는 오리진을 공유한다
 
-유틸 여섯 개가 `mapleland.myungwoo.kr` 하나를 쓴다. **localStorage 는 오리진 단위라
+유틸 일곱 개가 `mapleland.myungwoo.kr` 하나를 쓴다. **localStorage 는 오리진 단위라
 경로로 갈라지지 않는다** — `/damage` 와 `/hunt` 는 같은 저장소를 본다.
 `myungwoo.github.io/<repo>` 들도 원래부터 같은 오리진이었다.
 
 규칙:
 
 - **앱 전용 값: `ml:<슬러그>:<이름>`** (`ml:damage:save:0`, `ml:hunt:records`,
-  `ml:exp:roiLevel`, `ml:split:tabs:v1`, `ml:hyperbody:state`)
+  `ml:exp:roiLevel`, `ml:split:tabs:v1`, `ml:hyperbody:state`, `ml:chaos:state`)
 - **일부러 공유하는 값: `ml:theme`** — 값은 `'light' | 'dark' | 'system'`.
   같은 사이트인데 앱마다 다크모드를 따로 기억하면 화면이 튀어서 공유한다.
   **모르는 값을 만나면 시스템 설정으로 보고, 절대 덮어쓰지 말 것.**
@@ -136,8 +136,8 @@ mapleland-utils" 단계를 먼저 볼 것.
 
 ### 10. 랜딩 페이지에 프레임워크를 들이지 않는다
 
-지금 랜딩은 의존성 0, 빌드 0(노드 표준 라이브러리만)이다. 카드 여섯 장을 그리는 일에
-번들러를 붙이면 이 리포의 CI 가 유틸 6개 빌드 + 자기 빌드로 늘어난다. 스타일은
+지금 랜딩은 의존성 0, 빌드 0(노드 표준 라이브러리만)이다. 카드 일곱 장을 그리는 일에
+번들러를 붙이면 이 리포의 CI 가 유틸 7개 빌드 + 자기 빌드로 늘어난다. 스타일은
 `build-site.mjs` 안의 인라인 CSS 하나로 유지한다.
 
 ## 배포 한 번만 하는 설정
